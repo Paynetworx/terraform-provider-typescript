@@ -1,6 +1,7 @@
 # github.com/agext/levenshtein v1.2.2
 github.com/agext/levenshtein
 # github.com/apparentlymart/go-cidr v1.1.0
+## explicit
 github.com/apparentlymart/go-cidr/cidr
 # github.com/apparentlymart/go-textseg v1.0.0
 github.com/apparentlymart/go-textseg/textseg
@@ -53,6 +54,8 @@ github.com/blang/semver
 github.com/davecgh/go-spew/spew
 # github.com/fatih/color v1.7.0
 github.com/fatih/color
+# github.com/go-test/deep v1.0.3
+## explicit
 # github.com/golang/protobuf v1.5.2
 github.com/golang/protobuf/proto
 github.com/golang/protobuf/ptypes
@@ -61,6 +64,7 @@ github.com/golang/protobuf/ptypes/duration
 github.com/golang/protobuf/ptypes/empty
 github.com/golang/protobuf/ptypes/timestamp
 # github.com/google/go-cmp v0.5.7
+## explicit
 github.com/google/go-cmp/cmp
 github.com/google/go-cmp/cmp/internal/diff
 github.com/google/go-cmp/cmp/internal/flags
@@ -69,25 +73,28 @@ github.com/google/go-cmp/cmp/internal/value
 # github.com/hashicorp/errwrap v1.0.0
 github.com/hashicorp/errwrap
 # github.com/hashicorp/go-cleanhttp v0.5.2
+## explicit
 github.com/hashicorp/go-cleanhttp
-# github.com/hashicorp/go-cty v1.4.1-0.20200414143053-d3edf31b6320
-github.com/hashicorp/go-cty/cty
-github.com/hashicorp/go-cty/cty/set
 # github.com/hashicorp/go-getter v1.1.0
 github.com/hashicorp/go-getter
 github.com/hashicorp/go-getter/helper/url
 # github.com/hashicorp/go-hclog v1.2.0
+## explicit
 github.com/hashicorp/go-hclog
 # github.com/hashicorp/go-multierror v1.1.1
+## explicit
 github.com/hashicorp/go-multierror
 # github.com/hashicorp/go-plugin v1.4.3
+## explicit
 github.com/hashicorp/go-plugin
 github.com/hashicorp/go-plugin/internal/plugin
 # github.com/hashicorp/go-safetemp v1.0.0
 github.com/hashicorp/go-safetemp
 # github.com/hashicorp/go-uuid v1.0.2
+## explicit
 github.com/hashicorp/go-uuid
 # github.com/hashicorp/go-version v1.4.0
+## explicit
 github.com/hashicorp/go-version
 # github.com/hashicorp/hcl v1.0.0
 ## explicit
@@ -101,7 +108,6 @@ github.com/hashicorp/hcl/json/parser
 github.com/hashicorp/hcl/json/scanner
 github.com/hashicorp/hcl/json/token
 # github.com/hashicorp/hcl2 v0.0.0-20190416162332-2c5a4b7d729a
-## explicit
 github.com/hashicorp/hcl2/ext/dynblock
 github.com/hashicorp/hcl2/ext/typeexpr
 github.com/hashicorp/hcl2/gohcl
@@ -168,13 +174,15 @@ github.com/hashicorp/terraform/tfdiags
 github.com/hashicorp/terraform/version
 # github.com/hashicorp/terraform-config-inspect v0.0.0-20190327195015-8022a2663a70
 github.com/hashicorp/terraform-config-inspect/tfconfig
-# github.com/hashicorp/terraform-plugin-sdk/v2 v2.12.0
-## explicit
-github.com/hashicorp/terraform-plugin-sdk/v2/diag
 # github.com/hashicorp/yamux v0.0.0-20181012175058-2f1d1f20f75d
+## explicit
 github.com/hashicorp/yamux
 # github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af
 github.com/jmespath/go-jmespath
+# github.com/kr/text v0.2.0
+## explicit
+# github.com/kylelemons/godebug v1.1.0
+## explicit
 # github.com/mattn/go-colorable v0.1.4
 github.com/mattn/go-colorable
 # github.com/mattn/go-isatty v0.0.10
@@ -184,16 +192,20 @@ github.com/mitchellh/cli
 # github.com/mitchellh/colorstring v0.0.0-20190213212951-d06e56a500db
 github.com/mitchellh/colorstring
 # github.com/mitchellh/copystructure v1.2.0
+## explicit
 github.com/mitchellh/copystructure
 # github.com/mitchellh/go-homedir v1.1.0
+## explicit
 github.com/mitchellh/go-homedir
 # github.com/mitchellh/go-testing-interface v1.14.1
+## explicit
 github.com/mitchellh/go-testing-interface
 # github.com/mitchellh/go-wordwrap v1.0.0
 github.com/mitchellh/go-wordwrap
 # github.com/mitchellh/hashstructure v1.0.0
 github.com/mitchellh/hashstructure
 # github.com/mitchellh/mapstructure v1.4.3
+## explicit
 github.com/mitchellh/mapstructure
 # github.com/mitchellh/reflectwalk v1.0.2
 github.com/mitchellh/reflectwalk
@@ -204,6 +216,8 @@ github.com/posener/complete
 github.com/posener/complete/cmd
 github.com/posener/complete/cmd/install
 github.com/posener/complete/match
+# github.com/sergi/go-diff v1.2.0
+## explicit
 # github.com/spf13/afero v1.2.1
 github.com/spf13/afero
 github.com/spf13/afero/mem
@@ -230,6 +244,7 @@ github.com/zclconf/go-cty/cty/json
 github.com/zclconf/go-cty/cty/msgpack
 github.com/zclconf/go-cty/cty/set
 # golang.org/x/crypto v0.0.0-20210616213533-5ff15b29337e
+## explicit
 golang.org/x/crypto/bcrypt
 golang.org/x/crypto/blowfish
 golang.org/x/crypto/cast5
@@ -240,6 +255,7 @@ golang.org/x/crypto/openpgp/errors
 golang.org/x/crypto/openpgp/packet
 golang.org/x/crypto/openpgp/s2k
 # golang.org/x/net v0.0.0-20210326060303-6b1517762897
+## explicit
 golang.org/x/net/context
 golang.org/x/net/http/httpguts
 golang.org/x/net/http2
@@ -256,6 +272,7 @@ golang.org/x/text/transform
 golang.org/x/text/unicode/bidi
 golang.org/x/text/unicode/norm
 # google.golang.org/appengine v1.6.6
+## explicit
 google.golang.org/appengine
 google.golang.org/appengine/datastore
 google.golang.org/appengine/datastore/internal/cloudkey
@@ -268,8 +285,10 @@ google.golang.org/appengine/internal/log
 google.golang.org/appengine/internal/modules
 google.golang.org/appengine/internal/remote_api
 # google.golang.org/genproto v0.0.0-20200711021454-869866162049
+## explicit
 google.golang.org/genproto/googleapis/rpc/status
 # google.golang.org/grpc v1.45.0
+## explicit
 google.golang.org/grpc
 google.golang.org/grpc/attributes
 google.golang.org/grpc/backoff
@@ -321,6 +340,7 @@ google.golang.org/grpc/status
 google.golang.org/grpc/tap
 google.golang.org/grpc/test/bufconn
 # google.golang.org/protobuf v1.27.1
+## explicit
 google.golang.org/protobuf/encoding/prototext
 google.golang.org/protobuf/encoding/protowire
 google.golang.org/protobuf/internal/descfmt
@@ -352,3 +372,5 @@ google.golang.org/protobuf/types/known/anypb
 google.golang.org/protobuf/types/known/durationpb
 google.golang.org/protobuf/types/known/emptypb
 google.golang.org/protobuf/types/known/timestamppb
+# gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c
+## explicit
