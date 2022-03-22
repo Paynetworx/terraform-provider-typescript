@@ -2,8 +2,11 @@ package typescript
 
 import (
 	"github.com/hashicorp/terraform/helper/schema"
+	"bytes"
+	"archive/zip"
 	"io/ioutil"
 	"os"
+	"io"
 	"os/exec"
 	"fmt"
 	"path"
@@ -11,6 +14,11 @@ import (
 	"io/fs"
 	"strings"
 	"math/rand"
+	"crypto/md5"
+	"crypto/sha1"
+	"crypto/sha256"
+	"encoding/base64"
+	"encoding/hex"
 )
 
 func resourceTypescriptFile() *schema.Resource {
@@ -32,22 +40,25 @@ func resourceTypescriptFile() *schema.Resource {
 				Optional:    true,
 				ForceNew:    true,
 			},
-			"output_files": {
-				Type:        schema.TypeList,
-				Description: "file names and contents of generated javascript files",
+			"output_md5": {
+				Type:        schema.TypeString,
+				Description: "base64 encoded zip file of generated code",
 				Computed:    true,
-				Elem:        &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"content":{
-										Type: schema.TypeString,
-										Computed: true,
-									},
-									"filename":{
-										Type: schema.TypeString,
-										Computed: true,
-									},
-								},
-							 },
+			},
+			"output_sha": {
+				Type:        schema.TypeString,
+				Description: "base64 encoded zip file of generated code",
+				Computed:    true,
+			},
+			"output_base64sha256": {
+				Type:        schema.TypeString,
+				Description: "base64 encoded zip file of generated code",
+				Computed:    true,
+			},
+			"output_content_base64": {
+				Type:        schema.TypeString,
+				Description: "base64 encoded zip file of generated code",
+				Computed:    true,
 			},
 			"target":{
 				Type:		 schema.TypeString,
@@ -85,32 +96,54 @@ func resourceTypescriptCreate(d *schema.ResourceData, meta interface{}) error {
 		fmt.Print(string(stdout))
 		return err
 	}
+	out := bytes.Buffer{}	
+	zip := zip.NewWriter(&out)
 
-	output_files := []map[string]string{}
 	err = filepath.Walk(dir, func(path string, info fs.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}
 		if !info.IsDir() {
 			filename := strings.Replace(path,fmt.Sprint(dir,"/"),"",1)
-			out := map[string]string{}
-			out["filename"]=filename
-			contents, err := ioutil.ReadFile(path)
+			contents, err := os.Open(path)
 			if err != nil {
 				return err
 			}
-			out["content"]=string(contents)
-			output_files = append(output_files,out)
+			writer, err := zip.Create(filename)	
+			if err != nil {
+				return err
+			}
+			io.Copy(writer, contents)
 		}
 		return nil
 	})
+	zip.Close()
+	data:= out.Bytes()
+
+	h := sha1.New()
+	h.Write(data)
+	sha1 := hex.EncodeToString(h.Sum(nil))
+	d.Set("output_sha",sha1)
+
+	h256 := sha256.New()
+	h256.Write(data)
+
+	shaSum := h256.Sum(nil)
+	sha256base64 := base64.StdEncoding.EncodeToString(shaSum[:])
+	d.Set("output_base64sha256",sha256base64)
+
+	md5 := md5.New()
+	md5.Write(data)
+	md5Sum := hex.EncodeToString(md5.Sum(nil))
+	d.Set("output_md5",md5Sum)
+
+	out_base64 := base64.StdEncoding.EncodeToString(data)
+	d.Set("output_content_base64",out_base64)
+
 	if err != nil {
 		return err
 	}
 	
-	if err:=d.Set("output_files",output_files); err != nil {
-		return err	
-	}
 	d.SetId(fmt.Sprintf("%d", rand.Int()))
 	return nil
 }

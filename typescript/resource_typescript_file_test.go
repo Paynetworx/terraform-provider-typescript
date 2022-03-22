@@ -34,9 +34,7 @@ func TestTemplateDirRendering(t *testing.T) {
 				{
 					Config: fmt.Sprintf(templateTypescriptFileConfig, tt.file),
 					Check: r.ComposeTestCheckFunc(
-						r.TestCheckResourceAttr(dsn,"output_files.#","4"),
-						r.TestCheckResourceAttr(dsn,"output_files.0.filename","example_handler.js"),
-						r.TestCheckResourceAttr(dsn,"output_files.0.content","import * as lib from './lib';\nexport function handler() {\n    console.log(lib);\n}\n"),
+						r.TestCheckResourceAttr(dsn,"output_sha","9b7d55491b87d06bc0412a420b244f1bce9c929e"),
 					),
 				},
 			},
