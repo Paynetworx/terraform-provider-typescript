@@ -66,6 +66,26 @@ func resourceTypescriptFile() *schema.Resource {
 				Required:	 true,
 				ForceNew:	 true,
 			},
+			"additional_files":{
+				Type:		 schema.TypeList,
+				Description: "additional files to put into zip file",
+				Optional:    true,
+				ForceNew:	 true,
+				Elem:	     &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"content": {
+										Type:     schema.TypeString,
+										Required: true,
+										ForceNew: true,
+									},
+									"filename": {
+										Type:     schema.TypeString,
+										Required: true,
+										ForceNew: true,
+									},	
+								},
+							 },
+			},
 		},
 	}
 }
@@ -117,6 +137,16 @@ func resourceTypescriptCreate(d *schema.ResourceData, meta interface{}) error {
 		}
 		return nil
 	})
+	if additional_files, ok := d.GetOk("additional_files"); ok {
+		for _, additional_file := range additional_files.(*schema.Set).List() {
+			src := additional_file.(map[string]string)
+			writer, err := zip.Create(src["filename"])
+			if err != nil {
+				return err
+			}
+			writer.Write([]byte(src["content"]))	
+		}
+	}
 	zip.Close()
 	data:= out.Bytes()
 
