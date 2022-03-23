@@ -84,7 +84,7 @@ func resourceTypescriptFile() *schema.Resource {
 										ForceNew: true,
 									},	
 								},
-							 },
+				},
 			},
 		},
 	}
@@ -138,13 +138,14 @@ func resourceTypescriptCreate(d *schema.ResourceData, meta interface{}) error {
 		return nil
 	})
 	if additional_files, ok := d.GetOk("additional_files"); ok {
-		for _, additional_file := range additional_files.(*schema.Set).List() {
-			src := additional_file.(map[string]string)
-			writer, err := zip.Create(src["filename"])
+		additional_files_list := additional_files.([]interface{})
+		for _, additional_file := range  additional_files_list {
+			src := additional_file.(map[string]interface{})
+			writer, err := zip.Create(src["filename"].(string))
 			if err != nil {
 				return err
 			}
-			writer.Write([]byte(src["content"]))	
+			writer.Write([]byte(src["content"].(string)))	
 		}
 	}
 	zip.Close()

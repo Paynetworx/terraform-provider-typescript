@@ -12,6 +12,10 @@ const templateTypescriptFileConfig = `
 resource "typescript_file" "handler" {
 	source = "%s"
 	target = "es2020"
+	additional_files {
+		filename = "test.txt"
+		content = "hello world"
+	}
 }
 
 `
@@ -34,7 +38,7 @@ func TestTemplateDirRendering(t *testing.T) {
 				{
 					Config: fmt.Sprintf(templateTypescriptFileConfig, tt.file),
 					Check: r.ComposeTestCheckFunc(
-						r.TestCheckResourceAttr(dsn,"output_sha","9b7d55491b87d06bc0412a420b244f1bce9c929e"),
+						r.TestCheckResourceAttr(dsn,"output_sha","cc4994ff823cf9b6a00aee89bcf08362ea01c138"),
 					),
 				},
 			},
