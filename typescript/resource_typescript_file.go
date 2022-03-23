@@ -55,9 +55,9 @@ func resourceTypescriptFile() *schema.Resource {
 				Description: "base64 encoded zip file of generated code",
 				Computed:    true,
 			},
-			"output_content_base64": {
+			"output_file":{
 				Type:        schema.TypeString,
-				Description: "base64 encoded zip file of generated code",
+				Description: "path to outputed file",
 				Computed:    true,
 			},
 			"target":{
@@ -96,6 +96,11 @@ func resourceTypescriptCreate(d *schema.ResourceData, meta interface{}) error {
 	target := d.Get("target").(string)
 
 	dir, err := ioutil.TempDir("","*")
+	if err != nil {
+		return err
+	}
+	output_file, err := ioutil.TempFile("","lambda.zip")
+	d.Set("output_file",output_file.Name())
 	if err != nil {
 		return err
 	}
@@ -167,10 +172,8 @@ func resourceTypescriptCreate(d *schema.ResourceData, meta interface{}) error {
 	md5.Write(data)
 	md5Sum := hex.EncodeToString(md5.Sum(nil))
 	d.Set("output_md5",md5Sum)
-
-	out_base64 := base64.StdEncoding.EncodeToString(data)
-	d.Set("output_content_base64",out_base64)
-
+	
+	_, err = io.Copy(output_file,bytes.NewBuffer(data))
 	if err != nil {
 		return err
 	}
