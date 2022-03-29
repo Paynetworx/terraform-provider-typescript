@@ -112,6 +112,7 @@ func resourceTypescriptCreate(d *schema.ResourceData, meta interface{}) error {
 		"--moduleResolution","node",
 		"--outdir",dir,
 		"--listFiles",
+		"--module","commonjs",
 		"--pretty","false",
 		source_file)
 	cmd.Dir = working_dir
