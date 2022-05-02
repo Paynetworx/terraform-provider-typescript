@@ -38,7 +38,7 @@ func TestTemplateDirRendering(t *testing.T) {
 				{
 					Config: fmt.Sprintf(templateTypescriptFileConfig, tt.file),
 					Check: r.ComposeTestCheckFunc(
-						r.TestCheckResourceAttr(dsn,"output_sha","cc4994ff823cf9b6a00aee89bcf08362ea01c138"),
+						r.TestCheckResourceAttr(dsn,"output_sha","1ff6882bd3f50d64d4d043917c0cea4a241627da"),
 					),
 				},
 			},
