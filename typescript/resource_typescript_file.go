@@ -66,6 +66,13 @@ func resourceTypescriptFile() *schema.Resource {
 				Required:	 true,
 				ForceNew:	 true,
 			},
+			"es_module_interop":{
+				Type:			schema.TypeBool,
+				Description:	"turns on esModuleInterop in the compile step",
+				Optional:		true,
+				Default:		false,
+				ForceNew:		true,
+			},
 			"additional_files":{
 				Type:		 schema.TypeList,
 				Description: "additional files to put into zip file",
@@ -94,7 +101,11 @@ func resourceTypescriptFile() *schema.Resource {
 func resourceTypescriptCreate(d *schema.ResourceData, meta interface{}) error {
 	source := d.Get("source").(string)
 	target := d.Get("target").(string)
-
+	esModuleInterop_arg := ""
+	esModuleInterop := d.Get("es_module_interop").(bool)
+	if(esModuleInterop){
+		esModuleInterop_arg = "--esModuleInterop"
+	}
 	dir, err := ioutil.TempDir("","*")
 	if err != nil {
 		return err
@@ -114,6 +125,7 @@ func resourceTypescriptCreate(d *schema.ResourceData, meta interface{}) error {
 		"--listFiles",
 		"--module","commonjs",
 		"--pretty","false",
+		esModuleInterop_arg,
 		source_file)
 	cmd.Dir = working_dir
 
